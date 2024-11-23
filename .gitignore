@@ -3,3 +3,4 @@ idea.txt
 *.jpg
 *.pkl
 *.parquet
+*.csv
