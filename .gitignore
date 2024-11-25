@@ -4,3 +4,5 @@ idea.txt
 *.pkl
 *.parquet
 *.csv
+!/additional_files/avatar_for_project.jpg
+*.psd
