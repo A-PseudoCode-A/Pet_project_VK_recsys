@@ -1,6 +1,6 @@
 <!-- Место для картинки -->
 <p align="center">
-  <img src="C:\All_Enough\Pseudocode\Проекты\1_progect_vk\additional_files\avatar_for_project.jpg" alt="Логотип проекта" width="600">
+  <img src="additional_files/avatar_for_project.jpg" alt="Логотип проекта" width="600">
 </p>
 
 <!-- Название проекта -->
