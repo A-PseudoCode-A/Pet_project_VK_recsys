@@ -3,6 +3,7 @@ from recbole.config import Config
 from recbole.data import create_dataset, data_preparation
 from recbole.model.context_aware_recommender import DeepFM
 from recbole.trainer import Trainer
+from recbole.quick_start import run_recbole
 
 # Считываем наши данные
 train_interaction = pd.read_pickle("../../01_data/ready_data/02_ready_train_data.pkl")
@@ -20,29 +21,30 @@ interaction["Gender"] = interaction["Gender"].astype("category").cat.codes
 interaction["video_source_id"] = (
     interaction["video_source_id"].astype("category").cat.codes
 )
+
 interaction.info()
+interaction = interaction.iloc[:, [0, 1, 2]].rename(
+    columns={
+        "user_id": "user_id:token",
+        "item_id": "item_id:token",
+        "target": "rating:float",
+    }
+)
+interaction["rating:float"] = interaction["rating:float"].astype(float)
 
-interaction.to_csv("final_dataset.csv", index=False)
+interaction.to_csv("data.inter", index=False)
 
 
-# Загрузка конфигурации
-config = Config(model="DeepFM", dataset="data.csv")
+config_dict = {
+    "model": "DeepFM",
+    "dataset": "data",
+    "data_path": "../DeepFM",  # Путь к папке с файлом data.inter
+    "field_separator": "	",
+    "epochs": 10,
+    "learning_rate": 0.001,
+    "embedding_size": 64,
+    "train_batch_size": 256,
+    "neg_sampling": None,
+}
 
-# Проверьте путь
-print("Dataset path:", config["data_path"])
-print("Dataset name:", config["dataset"])
-
-# Создание датасета
-dataset = create_dataset(config)
-
-import os
-
-print(os.getcwd())
-
-data_path = "./"
-dataset_file = os.path.join(data_path, "final_dataset.csv")
-
-if os.path.exists(dataset_file):
-    print("Файл найден:", dataset_file)
-else:
-    print("Файл не найден по пути:", dataset_file)
+run_recbole(config_dict=config_dict)

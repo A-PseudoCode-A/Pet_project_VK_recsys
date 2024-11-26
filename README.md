@@ -1,6 +1,6 @@
 <!-- Место для картинки -->
 <p align="center">
-  <img src="additional_files/avatar_for_project.jpg" alt="Логотип проекта" width="600">
+  <img src="additional_files/avatar_for_project.jpg" alt="Логотип проекта" width="1000">
 </p>
 
 <!-- Название проекта -->
