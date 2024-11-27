@@ -11,7 +11,7 @@ from recbole.utils import init_seed, init_logger
 train_interaction = pd.read_pickle("../../01_data/ready_data/02_ready_train_data.pkl")
 
 # Батч для теста модели
-train_interaction = train_interaction.sample(n=1_000_000)
+train_interaction = train_interaction.sample(n=10_000_000)
 
 # Создание данных interecation для работы с LightGCN
 interaction = train_interaction.iloc[:, [0, 1, -1, 5, 7, 3, 4]]
@@ -21,10 +21,10 @@ interaction = interaction.rename(
         "user_id": "user_id:token",
         "item_id": "item_id:token",
         "target": "label:float",
-        'user_age': "user_age:token",
+        "user_age": "user_age:token",
         "Gender": "gender:token",
-        "video_source_id" : "video_source_id:token",
-        "video_duration": "video_duration:token"
+        "video_source_id": "video_source_id:token",
+        "video_duration": "video_duration:token",
     }
 )
 
@@ -57,8 +57,8 @@ config_dict = {
     "load_col": {
         "inter": ["user_id", "item_id", "label"],
         "user": ["user_id", "gender", "age"],
-        "item": ["item_id", "video_source_id", "video_duration"]
-        },
+        "item": ["item_id", "video_source_id", "video_duration"],
+    },
     "epochs": 10,
     "learning_rate": 0.001,
     "embedding_size": 64,
@@ -69,7 +69,7 @@ config_dict = {
 config = Config(config_dict=config_dict)
 
 # init random seed
-init_seed(config['seed'], config['reproducibility'])
+init_seed(config["seed"], config["reproducibility"])
 
 # logger initialization
 init_logger(config)
@@ -86,7 +86,7 @@ logger.info(dataset)
 train_data, valid_data, test_data = data_preparation(config, dataset)
 
 # model loading and initialization
-model = DeepFM(config, train_data.dataset).to('cuda')
+model = DeepFM(config, train_data.dataset).to("cuda")
 logger.info(model)
 
 # trainer loading and initialization
@@ -98,8 +98,3 @@ best_valid_score, best_valid_result = trainer.fit(train_data, valid_data)
 # model evaluation
 test_result = trainer.evaluate(test_data)
 print(test_result)
-
-
-
-
-
