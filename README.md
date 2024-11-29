@@ -7,36 +7,45 @@
 <h1 align="center">Machine learning model creation project for VK RecSys Challenge</h1>
 
 <!-- Описание проекта -->
-<p align="center"><i>В рамках данного проекта я провел полный цикл работы с данными: от их анализа и предобработки до построения и изучения моделей машинного обучения. Целью проекта было определить наиболее подходящую модель, которая бы смогла рекомендовать видео другим пользоватеям. </i></p>
+<p align="center"><i>As part of this project, I carried out a full cycle of work with data: from their analysis and preprocessing to the construction and study of machine learning models. The goal of the project was to determine the most suitable model that could recommend videos to other users. </i></p>
 
 ---
 
-## Глава 1. Введение
-Цель: построить модель, которая будет предсказывать лайки/дизлайки пользователей в будущем. 
-Данные: основные данные - это разряженная матрица взаимодествий множества пользователей U и множества объектов I. Также дополнительно есть данные о пользователях (пол, возраст), объектах (емюеддинги, авторы видео)
-Метрика: ROC AUC на 3-х метках (like = 1, dislike = -1, ignore = 0)
+## Chapter 1. Introduction
+Goal: build a model that will predict user likes/dislikes in the future.
+
+Data: the main data is a sparse matrix of interactions between a set of users U and a set of objects I. There is also additional data on users (gender, age), objects (e-mails, video authors)
+Metric: ROC AUC on 3 labels (like = 1, dislike = -1, ignore = 0)
 
 ---
 
-## Глава 2. Анализ и визуализация данных
-На первом этапе проекта я провел исследовательский анализ данных (EDA) для изучения структуры и характеристик данных. Ключевые шаги включали:
+## Chapter 2. Data Analysis and Visualization
+In the first phase of the project, I conducted exploratory data analysis (EDA) to examine the structure and characteristics of the data. Key steps included:
 
-Выявление закономерностей, пропусков и выбросов в данных.
-Визуализация данных с использованием библиотек matplotlib и seaborn для лучшего понимания распределений и взаимосвязей между переменными.
+Identifying patterns, gaps, and outliers in the data.
+Visualizing the data using matplotlib and seaborn libraries to better understand the distributions and relationships between variables.
 
-В итоге я пришел к таким графикам (ВСТАВИТЬ РИСУНКИ)
+I ended up with these graphs:
+
+<table>
+  <tr>
+    <td><img src="03_visualization/age.jpg" alt="Image 1" width="200"/></td>
+    <td><img src="03_visualization/gender.jpg" alt="Image 2" width="200"/></td>
+  </tr>
+  <tr>
+    <td><img src="03_visualization/heat_chart.jpg" alt="Image 3" width="200"/></td>
+    <td><img src="03_visualization/like_dislike.jpg" alt="Image 4" width="200"/></td>
+  </tr>
+</table>
 
 ---
 
-## Глава 3. Установка и запуск
-bнструкции по установке, клонированию репозитория, установке зависимостей и запуску проекта:
+## Chapter 3. Installation and Launch
+Instructions for installation, cloning the repository, installing dependencies, and launching the project:
 
 ```bash
-# Клонирование репозитория
+# Cloning the repository
 git clone https://github.com/A-PseudoCode-A/Pet_project_VK_recsys.git
 
-# Переход в директорию проекта
-cd ваш_проект
-
-# Установка зависимостей
+# Installing dependencies
 pip install -r requirements.txt

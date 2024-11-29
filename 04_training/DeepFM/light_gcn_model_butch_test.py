@@ -3,6 +3,7 @@ from recbole.config import Config
 from recbole.data import create_dataset, data_preparation
 from recbole.model.context_aware_recommender import DeepFM
 from recbole.trainer import Trainer
+from recbole.quick_start import run_recbole
 
 from logging import getLogger
 from recbole.utils import init_seed, init_logger
