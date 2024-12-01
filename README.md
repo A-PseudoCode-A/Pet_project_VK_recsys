@@ -29,12 +29,12 @@ I ended up with these graphs:
 
 <table>
   <tr>
-    <td><img src="03_visualization/age.jpg" alt="Image 1" width="200"/></td>
-    <td><img src="03_visualization/gender.jpg" alt="Image 2" width="200"/></td>
+    <td><img src="02_visualization/age.jpg" alt="Image 1" width="200"/></td>
+    <td><img src="02_visualization/gender.jpg" alt="Image 2" width="200"/></td>
   </tr>
   <tr>
-    <td><img src="03_visualization/heat_chart.jpg" alt="Image 3" width="200"/></td>
-    <td><img src="03_visualization/like_dislike.jpg" alt="Image 4" width="200"/></td>
+    <td><img src="02_visualization/heat_chart.jpg" alt="Image 3" width="200"/></td>
+    <td><img src="02_visualization/like_dislike.jpg" alt="Image 4" width="200"/></td>
   </tr>
 </table>
 
