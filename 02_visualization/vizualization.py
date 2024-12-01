@@ -18,7 +18,13 @@ def graph_settings(size_x=12, size_y=8, dpi=300, style="whitegrid", pallete="vir
     sns.set_palette(palette=pallete)
 
 
-def data_vizualization(input_file, sample_len=None):
+def data_vizualization(input_file='01_train_data_for_preprocessing"', sample_len=None):
+    """A function that visualizes certain aspects of a dataset using the seaborn library
+
+    Args:
+        input_file (str, optional): The file that stores the dataset after the train_data_for_preprocessing function. Defaults to '01_train_data_for_preprocessing"'.
+        sample_len (int, optional): Number of elements in the resulting dataset. Defaults to None, meaning all data will be used.
+    """
     # Reading data
     train_data = pd.read_pickle(
         f"../03_feature_eng_and_ready_data/ready_data/{input_file}.pkl"
@@ -71,4 +77,5 @@ def data_vizualization(input_file, sample_len=None):
     )
 
 
-data_vizualization(input_file="01_train_data_for_preprocessing", sample_len=100_000)
+# Calling functions
+data_vizualization(sample_len=100_000)

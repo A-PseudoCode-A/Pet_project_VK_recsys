@@ -47,7 +47,13 @@ class MLP(nn.Module):
         return self.softmax(x)
 
 
-def train_MPL(input_file="01_train_data_for_preprocessing", epochs=50):
+def train_MPL(input_file="02_train_data_for_training_MPL", epochs=50):
+    """_Function for training the model. It describes the entire training and validation cycle
+
+    Args:
+        input_file (str, optional): The file where the dataset is stored after applying the train_data_for_training_DeepFM function. Defaults to "01_train_data_for_training_MPL".
+        epochs (int, optional): number of full passes over the entire dataset. Defaults to 50.
+    """
     # Reading data
     train_data = pd.read_pickle(
         f"../../03_feature_eng_and_ready_data/ready_data/{input_file}.pkl"
@@ -138,3 +144,7 @@ def train_MPL(input_file="01_train_data_for_preprocessing", epochs=50):
             print(
                 f"Epoch [{epoch+1} / {EPOCHS}], train_loss = {mean_train_loss:.4f}, val_loss = {mean_val_loss:.4f}, val_roc_auc = {mean_roc_auc:.4f}"
             )
+
+
+# Calling functions
+train_MPL()

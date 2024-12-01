@@ -11,7 +11,7 @@ def train_data_for_training_MPL(
     Args:
         input_file_name (str, optional): The file where the dataset is stored. Defaults to "01_train_data_for_preprocessing".
         output_file_name (str, optional): the file name you want to get. Defaults to '02_train_data_for_training'.
-        dataset_length (_type_, optional): Number of elements in the resulting dataset. Defaults to None, meaning all data will be used.
+        dataset_length (int, optional): Number of elements in the resulting dataset. Defaults to None, meaning all data will be used.
 
     Returns:
         output_file_name.pkl: Prepared dataset in pickle format
@@ -53,7 +53,7 @@ def train_data_for_training_DeepFM(
     Args:
         input_file_name (str, optional): The file where the dataset is stored. Defaults to "01_train_data_for_preprocessing".
         output_file_name (str, optional): the file name you want to get. Defaults to '02_train_data_for_training'.
-        dataset_length (_type_, optional): Number of elements in the resulting dataset. Defaults to None, meaning all data will be used.
+        dataset_length (int, optional): Number of elements in the resulting dataset. Defaults to None, meaning all data will be used.
 
     Returns:
         output_file_name.pkl: Prepared dataset in pickle format
@@ -93,7 +93,7 @@ def atomic_files_for_training_DeepFM(
 
     Args:
         input_file (str, optional): The file that stores the dataset after the train_data_for_training_DeepFM function. Defaults to "02_train_data_for_training_DeepFM".
-        data_lengh (_type_, optional): Number of elements in the resulting dataset. Defaults to None, meaning all data will be used.
+        data_lengh (int, optional): Number of elements in the resulting dataset. Defaults to None, meaning all data will be used.
 
     Returns:
         3 atomic files with extensions: inter, user, item
@@ -147,7 +147,8 @@ def atomic_files_for_training_DeepFM(
         ),
     )
 
-#Calling functions
+
+# Calling functions
 train_data_for_training_MPL()
 train_data_for_training_DeepFM()
 atomic_files_for_training_DeepFM(data_lengh=1_000_000)

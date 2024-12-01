@@ -29,7 +29,7 @@ import pandas as pd
 # Pairs were collected in the seventh week (immediately after training).
 
 
-def train_data_for_preprocessing(file_name = "01_train_data_for_preprocessing"):
+def train_data_for_preprocessing(file_name="01_train_data_for_preprocessing"):
     """Function that prepares a dataset for training
 
     Args:
@@ -78,7 +78,9 @@ def train_data_for_preprocessing(file_name = "01_train_data_for_preprocessing"):
     )
 
     # Create a file for the final dataset
-    return inter_data.to_pickle(f"../02_feature_eng_and_ready_data/ready_data/{file_name}.pkl")
+    return inter_data.to_pickle(
+        f"../02_feature_eng_and_ready_data/ready_data/{file_name}.pkl"
+    )
 
 
 # Calling a function
