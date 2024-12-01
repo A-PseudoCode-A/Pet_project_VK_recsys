@@ -1,6 +1,8 @@
 .venv
 idea.txt
-*.pkl
 *.parquet
 *.csv
 *.psd
+*.pkl
+/02_feature_eng_and_ready_data/ready_data/data_for_DeepFM/*
+!/02_feature_eng_and_ready_data/ready_data/data_for_DeepFM/.gitkeep

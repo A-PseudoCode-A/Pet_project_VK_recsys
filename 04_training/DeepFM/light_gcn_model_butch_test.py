@@ -8,47 +8,10 @@ from recbole.quick_start import run_recbole
 from logging import getLogger
 from recbole.utils import init_seed, init_logger
 
-# Считываем наши данные
-train_interaction = pd.read_pickle("../../01_data/ready_data/02_ready_train_data.pkl")
-
-# Батч для теста модели
-train_interaction = train_interaction.sample(n=10_000_000)
-
-# Создание данных interecation для работы с LightGCN
-interaction = train_interaction.iloc[:, [0, 1, -1, 5, 7, 3, 4]]
-
-interaction = interaction.rename(
-    columns={
-        "user_id": "user_id:token",
-        "item_id": "item_id:token",
-        "target": "label:float",
-        "user_age": "user_age:token",
-        "Gender": "gender:token",
-        "video_source_id": "video_source_id:token",
-        "video_duration": "video_duration:token",
-    }
-)
-
-
-interaction["user_id:token"] = interaction["user_id:token"].astype(int)
-interaction["item_id:token"] = interaction["item_id:token"].astype(int)
-interaction["label:float"] = interaction["label:float"].astype(float)
-interaction["user_age:token"] = interaction["user_age:token"].astype(int)
-interaction["gender:token"] = interaction["gender:token"].astype(int)
-interaction["video_source_id:token"] = interaction["video_source_id:token"].astype(int)
-interaction["video_duration:token"] = interaction["video_duration:token"].astype(int)
-
-interaction.info()
-
-interaction.iloc[:, [0, 1, 2]].to_csv("data.inter", index=False)
-interaction.iloc[:, [0, 3, 4]].to_csv("data.user", index=False)
-interaction.iloc[:, [1, 5, 6]].to_csv("data.item", index=False)
-
-
 config_dict = {
     "model": "DeepFM",
-    "dataset": "data",
-    "data_path": "../DeepFM",  # Путь к папке с файлом data.inter
+    "dataset": "data_for_DeepFM",
+    "data_path": "../../02_feature_eng_and_ready_data/ready_data",  # Путь к папке с файлом data.inter
     "field_separator": ",",
     "USER_ID_FIELD": "user_id",
     "ITEM_ID_FIELD": "item_id",
