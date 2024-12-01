@@ -7,19 +7,8 @@ import numpy as np
 from tqdm import tqdm
 from torch.utils.data import Dataset, DataLoader, random_split
 
-# Устанавливаем настройки для вывода значений в np-array
-np.set_printoptions(suppress=True)
 
-
-# Считываем наши данные
-train_data = pd.read_pickle("../../data/ready_data/02_ready_train_data.pkl")
-
-# Длина входядящго слоя
-X = train_data.iloc[:, 1:].drop(columns=["target"]).to_numpy()
-X[0].shape
-
-
-# Создаем собственный класс Dataset
+# Custom Dataset class for PyTorch
 class InteractionDataset(Dataset):
     def __init__(self, dataframe):
         # Отделяем признаки от меток
@@ -39,20 +28,7 @@ class InteractionDataset(Dataset):
         return self.features[idx], self.labels[idx]
 
 
-# Создаем наш dataset
-train_dataset = InteractionDataset(train_data)
-
-# Делаем train и val выборки
-train_dataset, val_dataset = random_split(train_dataset, [0.8, 0.2])
-
-# Создаем класс DataLoader
-batch_size = 64
-
-train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
-
-
-# Step 3: Определение MLP модели
+# MPL model class where the principle of matrix calculation is explained
 class MLP(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim):
         super(MLP, self).__init__()
@@ -71,6 +47,29 @@ class MLP(nn.Module):
         return self.softmax(x)
 
 
+
+# Считываем наши данные
+train_data = pd.read_pickle(
+    "../../03_feature_eng_and_ready_data/ready_data/01_train_data_for_preprocessing.pkl"
+)
+
+# Длина входядящго слоя
+X = train_data.iloc[:, 1:].drop(columns=["target"]).to_numpy()
+
+
+# Создаем наш dataset
+train_dataset = InteractionDataset(train_data)
+
+# Делаем train и val выборки
+train_dataset, val_dataset = random_split(train_dataset, [0.8, 0.2])
+
+# Создаем класс DataLoader
+batch_size = 64
+
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
+
+
 # Инициализация модели, функции потерь и оптимизатора
 input_dim = X[0].shape[0]
 hidden_dim = 64
@@ -78,7 +77,6 @@ output_dim = 3  # 3 класса: like, dislike, ignore
 model = MLP(input_dim, hidden_dim, output_dim).to(device="cuda")
 loss_function = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
-
 
 EPOCHS = 50
 train_loss = []

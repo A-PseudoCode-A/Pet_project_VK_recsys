@@ -4,5 +4,5 @@ idea.txt
 *.csv
 *.psd
 *.pkl
-/02_feature_eng_and_ready_data/ready_data/data_for_DeepFM/*
-!/02_feature_eng_and_ready_data/ready_data/data_for_DeepFM/.gitkeep
+/03_feature_eng_and_ready_data/ready_data/data_for_DeepFM/*
+!/03_feature_eng_and_ready_data/ready_data/data_for_DeepFM/.gitkeep

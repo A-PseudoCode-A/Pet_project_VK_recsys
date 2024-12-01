@@ -1,0 +1,181 @@
+Sun 01 Dec 2024 20:55:49 INFO  
+General Hyper Parameters:
+gpu_id = 0
+use_gpu = True
+seed = 2020
+state = INFO
+reproducibility = True
+data_path = ../../02_feature_eng_and_ready_data/ready_data\data_for_DeepFM
+checkpoint_dir = saved
+show_progress = True
+save_dataset = False
+dataset_save_path = None
+save_dataloaders = False
+dataloaders_save_path = None
+log_wandb = False
+
+Training Hyper Parameters:
+epochs = 10
+train_batch_size = 256
+learner = adam
+learning_rate = 0.001
+train_neg_sample_args = {'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}
+eval_step = 1
+stopping_step = 10
+clip_grad_norm = None
+weight_decay = 0.0
+loss_decimal_place = 4
+
+Evaluation Hyper Parameters:
+eval_args = {'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'RO', 'group_by': None, 'mode': {'valid': 'labeled', 'test': 'labeled'}}
+repeatable = False
+metrics = ['AUC', 'LogLoss']
+topk = [10]
+valid_metric = AUC
+valid_metric_bigger = True
+eval_batch_size = 4096
+metric_decimal_place = 4
+
+Dataset Hyper Parameters:
+field_separator = ,
+seq_separator =  
+USER_ID_FIELD = user_id
+ITEM_ID_FIELD = item_id
+RATING_FIELD = None
+TIME_FIELD = None
+seq_len = None
+LABEL_FIELD = label
+threshold = None
+NEG_PREFIX = neg_
+load_col = {'inter': ['user_id', 'item_id', 'label'], 'user': ['user_id', 'gender', 'age'], 'item': ['item_id', 'video_source_id', 'video_duration']}
+unload_col = None
+unused_col = None
+additional_feat_suffix = None
+rm_dup_inter = None
+val_interval = None
+filter_inter_by_user_or_item = True
+user_inter_num_interval = [0,inf)
+item_inter_num_interval = [0,inf)
+alias_of_user_id = None
+alias_of_item_id = None
+alias_of_entity_id = None
+alias_of_relation_id = None
+preload_weight = None
+normalize_field = None
+normalize_all = None
+ITEM_LIST_LENGTH_FIELD = item_length
+LIST_SUFFIX = _list
+MAX_ITEM_LIST_LENGTH = 50
+POSITION_FIELD = position_id
+HEAD_ENTITY_ID_FIELD = head_id
+TAIL_ENTITY_ID_FIELD = tail_id
+RELATION_ID_FIELD = relation_id
+ENTITY_ID_FIELD = entity_id
+benchmark_filename = None
+
+Other Hyper Parameters: 
+worker = 0
+wandb_project = recbole
+shuffle = True
+require_pow = False
+enable_amp = False
+enable_scaler = False
+transform = None
+embedding_size = 64
+mlp_hidden_size = [128, 128, 128]
+dropout_prob = 0.2
+numerical_features = []
+discretization = None
+kg_reverse_r = False
+entity_kg_num_interval = [0,inf)
+relation_kg_num_interval = [0,inf)
+MODEL_TYPE = ModelType.CONTEXT
+MODEL_INPUT_TYPE = InputType.POINTWISE
+eval_type = EvaluatorType.VALUE
+single_spec = True
+local_rank = 0
+device = cuda
+valid_neg_sample_args = {'distribution': 'none', 'sample_num': 'none'}
+test_neg_sample_args = {'distribution': 'none', 'sample_num': 'none'}
+
+
+Sun 01 Dec 2024 20:55:57 INFO  data_for_DeepFM
+The number of users: 162958
+Average actions of users: 6.136588179703848
+The number of items: 154670
+Average actions of items: 6.465419702720002
+The number of inters: 1000000
+The sparsity of the dataset: 99.99603248818632%
+Remain Fields: ['user_id', 'item_id', 'label', 'video_source_id', 'video_duration']
+Sun 01 Dec 2024 20:56:02 INFO  [Training]: train_batch_size = [256] train_neg_sample_args: [{'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}]
+Sun 01 Dec 2024 20:56:02 INFO  [Evaluation]: eval_batch_size = [4096] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'RO', 'group_by': None, 'mode': {'valid': 'labeled', 'test': 'labeled'}}]
+Sun 01 Dec 2024 20:56:05 INFO  DeepFM(
+  (token_embedding_table): FMEmbedding(
+    (embedding): Embedding(331505, 64)
+  )
+  (first_order_linear): FMFirstOrderLinear(
+    (token_embedding_table): FMEmbedding(
+      (embedding): Embedding(331505, 1)
+    )
+  )
+  (fm): BaseFactorizationMachine()
+  (mlp_layers): MLPLayers(
+    (mlp_layers): Sequential(
+      (0): Dropout(p=0.2, inplace=False)
+      (1): Linear(in_features=256, out_features=128, bias=True)
+      (2): ReLU()
+      (3): Dropout(p=0.2, inplace=False)
+      (4): Linear(in_features=128, out_features=128, bias=True)
+      (5): ReLU()
+      (6): Dropout(p=0.2, inplace=False)
+      (7): Linear(in_features=128, out_features=128, bias=True)
+      (8): ReLU()
+    )
+  )
+  (deep_predict_layer): Linear(in_features=128, out_features=3, bias=True)
+  (loss): MSELoss()
+)
+Trainable parameters: 21614133
+Sun 01 Dec 2024 20:56:56 INFO  epoch 0 training [time: 38.81s, train loss: 524.6536]
+Sun 01 Dec 2024 20:56:56 INFO  epoch 0 evaluating [time: 0.13s, valid_score: 0.493200]
+Sun 01 Dec 2024 20:56:56 INFO  valid result: 
+auc : 0.4932    logloss : 0.4093
+Sun 01 Dec 2024 20:56:56 INFO  Saving current: saved\DeepFM-Dec-01-2024_20-56-14.pth
+Sun 01 Dec 2024 20:57:35 INFO  epoch 1 training [time: 38.09s, train loss: 388.9553]
+Sun 01 Dec 2024 20:57:35 INFO  epoch 1 evaluating [time: 0.13s, valid_score: 0.523600]
+Sun 01 Dec 2024 20:57:35 INFO  valid result: 
+auc : 0.5236    logloss : 0.6488
+Sun 01 Dec 2024 20:57:35 INFO  Saving current: saved\DeepFM-Dec-01-2024_20-56-14.pth
+Sun 01 Dec 2024 20:58:13 INFO  epoch 2 training [time: 38.26s, train loss: 235.5869]
+Sun 01 Dec 2024 20:58:13 INFO  epoch 2 evaluating [time: 0.13s, valid_score: 0.434000]
+Sun 01 Dec 2024 20:58:13 INFO  valid result: 
+auc : 0.434    logloss : 0.9688
+Sun 01 Dec 2024 20:58:52 INFO  epoch 3 training [time: 38.26s, train loss: 127.0739]
+Sun 01 Dec 2024 20:58:52 INFO  epoch 3 evaluating [time: 0.13s, valid_score: 0.515600]
+Sun 01 Dec 2024 20:58:52 INFO  valid result: 
+auc : 0.5156    logloss : 1.0128
+Sun 01 Dec 2024 20:59:30 INFO  epoch 4 training [time: 38.00s, train loss: 78.6764]
+Sun 01 Dec 2024 20:59:30 INFO  epoch 4 evaluating [time: 0.13s, valid_score: 0.451200]
+Sun 01 Dec 2024 20:59:30 INFO  valid result: 
+auc : 0.4512    logloss : 1.0352
+Sun 01 Dec 2024 21:00:08 INFO  epoch 5 training [time: 37.84s, train loss: 62.6170]
+Sun 01 Dec 2024 21:00:08 INFO  epoch 5 evaluating [time: 0.12s, valid_score: 0.485900]
+Sun 01 Dec 2024 21:00:08 INFO  valid result: 
+auc : 0.4859    logloss : 1.0671
+Sun 01 Dec 2024 21:00:47 INFO  epoch 6 training [time: 39.30s, train loss: 58.4896]
+Sun 01 Dec 2024 21:00:47 INFO  epoch 6 evaluating [time: 0.22s, valid_score: 0.509300]
+Sun 01 Dec 2024 21:00:47 INFO  valid result: 
+auc : 0.5093    logloss : 1.0917
+Sun 01 Dec 2024 21:01:30 INFO  epoch 7 training [time: 42.55s, train loss: 55.2124]
+Sun 01 Dec 2024 21:01:30 INFO  epoch 7 evaluating [time: 0.21s, valid_score: 0.448800]
+Sun 01 Dec 2024 21:01:30 INFO  valid result: 
+auc : 0.4488    logloss : 1.0107
+Sun 01 Dec 2024 21:02:11 INFO  epoch 8 training [time: 40.59s, train loss: 53.1571]
+Sun 01 Dec 2024 21:02:11 INFO  epoch 8 evaluating [time: 0.12s, valid_score: 0.493300]
+Sun 01 Dec 2024 21:02:11 INFO  valid result: 
+auc : 0.4933    logloss : 1.0552
+Sun 01 Dec 2024 21:02:49 INFO  epoch 9 training [time: 38.22s, train loss: 51.4415]
+Sun 01 Dec 2024 21:02:49 INFO  epoch 9 evaluating [time: 0.14s, valid_score: 0.430600]
+Sun 01 Dec 2024 21:02:49 INFO  valid result: 
+auc : 0.4306    logloss : 1.0633
+Sun 01 Dec 2024 21:02:57 INFO  Loading model structure and parameters from saved\DeepFM-Dec-01-2024_20-56-14.pth
